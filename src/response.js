@@ -1,9 +1,9 @@
-"use strict";
+'use strict'
 
-let Response = function( data, action ) {
-	this.data = data
-	this.action = action
-	this.send = () => action.context.success( data )
+let Response = function (data, action) {
+  this.data = data
+  this.action = action
+  this.send = () => action.context.success(data)
 }
 
 module.exports = Response
