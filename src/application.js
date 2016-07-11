@@ -11,7 +11,7 @@ application.run = ( action ) => {
 	AccessRules.checkAccess( identity, action )
 	action
 		.filterInput()
-		.execute()
+		.execute( identity, model )
 		.filterOutput()
 		.send();
 }

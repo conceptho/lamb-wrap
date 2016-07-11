@@ -10,8 +10,8 @@ let Action = function( config ) {
 	this.operation = config.operation
 	this.body = config.body
 	this.schema = config.schema
-	this.execute = () => {
-		this.response = new Response( this.body( this.event, this.context ), this )
+	this.execute = ( identity, model ) => {
+		this.response = new Response( this.body( this.event, this.context, identity, model ), this )
 		return this
 	}
 	this.filterInput = () => ParamsFilter.filterInput( this )
