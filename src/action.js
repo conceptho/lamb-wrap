@@ -1,8 +1,8 @@
 'use strict'
 
-let	ParamsFilter = require('./params-filter')
+let ParamsFilter = require('./param-filter')
 let Response = require('./response')
-let ModelLoader = require('./model-model-loader')
+let ModelLoader = require('./model-loader')
 
 let Action = function (config) {
   this.response = false
