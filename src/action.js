@@ -27,4 +27,11 @@ let Action = function (config) {
   this.loadModel = () => ModelLoader.load(this)
 }
 
-module.exports = Action
+module.exports = {
+  create: (config) => new Action(config),
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  VIEW: 'VIEW',
+  LIST: 'LIST'
+}
