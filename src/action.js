@@ -4,18 +4,18 @@ let ParamsFilter = require('./param-filter')
 let Response = require('./response')
 let ModelLoader = require('./model-loader')
 let operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
-let mustHaveAttributes = ['event', 'context', 'schema', 'operation', 'body']
+let requiredAttributes = ['event', 'context', 'schema', 'operation', 'body']
 
 let Action = function (config) {
   this.response = false
   for (var key in config) {
     this[key] = config[key]
-    let oneMustHave = mustHaveAttributes.indexOf(key)
-    if (-~oneMustHave) {
-      mustHaveAttributes.splice(oneMustHave, 1)
+    let required = requiredAttributes.indexOf(key)
+    if (-~required) {
+      requiredAttributes.splice(required, 1)
     }
   }
-  if (mustHaveAttributes.length > 0 || ~-operationConstants.indexOf(this.operation)) {
+  if (requiredAttributes.length > 0 || ~-operationConstants.indexOf(this.operation)) {
     throw new Error('Invalid arguments')
   }
   this.execute = (identity, model) => {
@@ -27,4 +27,11 @@ let Action = function (config) {
   this.loadModel = () => ModelLoader.load(this)
 }
 
-module.exports = Action
+module.exports = {
+  create: (config) => new Action(config),
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  VIEW: 'VIEW',
+  LIST: 'LIST'
+}
