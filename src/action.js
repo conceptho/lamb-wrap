@@ -4,22 +4,22 @@ let ParamsFilter = require('./param-filter')
 let Response = require('./response')
 let ModelLoader = require('./model-loader')
 let operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
-let requiredAttributes = ['event', 'context', 'schema', 'operation', 'body']
+let requiredAttributes = ['schema', 'operation', 'body']
 
 let Action = function (config) {
   this.response = false
   for (var key in config) {
     this[key] = config[key]
     let required = requiredAttributes.indexOf(key)
-    if (-~required) {
+    if (required !== -1) {
       requiredAttributes.splice(required, 1)
     }
   }
-  if (requiredAttributes.length > 0 || ~-operationConstants.indexOf(this.operation)) {
+  if (requiredAttributes.length > 0 || operationConstants.indexOf(this.operation) === -1) {
     throw new Error('Invalid arguments')
   }
   this.execute = (identity, model) => {
-    this.response = new Response(this.body(this.event, this.context, identity, model), this)
+    this.response = new Response(this.body(this, identity, model), this)
     return this
   }
   this.filterInput = () => ParamsFilter.filterInput(this)
