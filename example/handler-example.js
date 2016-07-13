@@ -1,6 +1,8 @@
 'use strict'
 // Should use require('lamb-warp') instead
-let { Application, Action } = require('./index')
+let Application = require('../index').Application
+let Action = require('../index').Action
+
 
 var body = (action, identity, model) => {
   model.save()
