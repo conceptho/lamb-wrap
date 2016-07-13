@@ -7,9 +7,9 @@ paramsFilter.filterInput = (action) => {
   return action
 }
 
-paramsFilter.filterOutput = (action, response) => {
+paramsFilter.filterOutput = (action) => {
   // TODO: MUST FILTER THE OUTPUT ATTRIBUTES BASED ON SCHEMA.ATTRIBUTERULES
-  return response
+  return action.response
 }
 
 module.exports = paramsFilter
