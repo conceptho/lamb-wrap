@@ -20,7 +20,7 @@ application.handler = (action) => {
 application.run = (action) => {
   let identity = Authenticator.getIdentity(action)
   let model = ModelLoader.load(action)
-  AccessRules.checkAccess(identity, action)
+  AccessRules.checkAccess(identity, model, action)
   return action
     .filterInput()
     .execute(identity, model)

@@ -15,7 +15,7 @@ userSchema.statics.expandables = function () {
   }
 }
 
-userSchema.statics.accessRule = function (user, model) {
+userSchema.statics.accessRules = function (user, model) {
   return {
     view: function (user, model) {
       return !!user.account_ids.indexOf(model.account_id)
