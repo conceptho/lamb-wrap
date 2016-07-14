@@ -2,6 +2,15 @@
 
 let User = {}
 
+let promiseSample = new Promise(
+  (resolve, reject) => {
+    setTimeout(
+      () => {
+        resolve(true)
+      }, 5000)
+  }
+)
+
 User.attributeRules = function () {
   return {
     account_id: 'protected',
@@ -25,7 +34,7 @@ User.accessRules = function (user, model) {
     UPDATE: (user, model) => true,
     DELETE: false,
     CREATE: true,
-    LIST: false
+    LIST: promiseSample
   }
 }
 

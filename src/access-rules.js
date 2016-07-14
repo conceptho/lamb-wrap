@@ -11,6 +11,9 @@ accessRules.checkAccess = (identity, model, action) => {
   if (typeof operation === 'function') {
     operation = operation(identity, model)
   }
+  if (Promise.resolve(operation) === operation) {
+    return operation
+  }
   if (!operation) {
     throw new Error('Operation not allowed in this model')
   }

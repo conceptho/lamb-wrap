@@ -18,14 +18,25 @@ application.handler = (action) => {
 }
 
 application.run = (action) => {
-  let identity = Authenticator.getIdentity(action)
-  let model = ModelLoader.load(action)
-  AccessRules.checkAccess(identity, model, action)
-  return action
-    .filterInput()
-    .execute(identity, model)
-    .filterOutput()
-    .send()
+  return Authenticator.getIdentity(action)
+    .then((identity) => {
+      return Promise.all([ModelLoader.load(action), identity])
+    })
+    .then((data) => {
+      let model = data[0]
+      let identity = data[1]
+      return Promise.all([AccessRules.checkAccess(identity, model, action), identity, model])
+    })
+    .then((data) => {
+      let identity = data[1]
+      let model = data[2]
+      return action
+        .filterInput()
+        .execute(identity, model)
+        .filterOutput()
+        .send()
+    })
+    .catch((err) => action.context.fail(err))
 }
 
 module.exports = application

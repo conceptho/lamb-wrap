@@ -22,5 +22,9 @@ describe('Access-rules Class', () => {
       (() => AccessRules.checkAccess({}, {}, {schema: User, operation: 'SOMESORTOFOPERATION'})).should.throw(Error)
       return done()
     })
+    it('Should not work if the operation is a valid promise', (done) => {
+      console.log(AccessRules.checkAccess({}, {}, {schema: User, operation: Action.LIST}))
+      return done()
+    })
   })
 })
