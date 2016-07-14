@@ -2,6 +2,7 @@
 
 let Action = require('../../src/action')
 let Application = require('../../src/application')
+let UserSchema = require('../mocks/user.schema')
 
 describe('Application Class', () => {
   describe('.run', () => {
@@ -10,7 +11,7 @@ describe('Application Class', () => {
       return done()
     })
     it('Should work when runing with a valid action', (done) => {
-      (() => Application.run(Action.create({event: {}, context: {success: () => null}, schema: 'User', operation: Action.DELETE, body: () => null}))).should.not.throw(Error)
+      (() => Application.run(Action.create({event: {}, context: {success: () => null}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
       return done()
     })
   })
