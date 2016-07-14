@@ -24,7 +24,6 @@ let Action = function (config) {
   }
   this.filterInput = () => ParamsFilter.filterInput(this)
   this.filterOutput = () => ParamsFilter.filterOutput(this)
-  this.loadModel = () => ModelLoader.load(this)
 }
 
 module.exports = {
