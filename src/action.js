@@ -2,7 +2,6 @@
 
 let ParamsFilter = require('./param-filter')
 let Response = require('./response')
-let ModelLoader = require('./model-loader')
 let operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
 let requiredAttributes = ['schema', 'operation', 'body']
 
