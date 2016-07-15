@@ -7,7 +7,7 @@ let UserSchema = require('../mocks/user.schema')
 describe('Application Class', () => {
   describe('.run', () => {
     it('Should work when runing with a valid action', (done) => {
-      (() => Application.run(Action.create({event: {}, context: {success: () => null, fail: (err) => { throw err }}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
+      (() => Application.run(Action.create({event: {}, context: {success: () => null, fail: (err) => err}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
       return done()
     })
   })
