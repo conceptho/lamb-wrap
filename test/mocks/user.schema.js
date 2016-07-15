@@ -2,14 +2,21 @@
 
 let User = {}
 
-let promiseSample = new Promise(
-  (resolve, reject) => {
-    setTimeout(
-      () => {
-        resolve(true)
-      }, 5000)
-  }
-)
+let promiseSampleFalse = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(false)
+    }, 50)
+  })
+}
+
+let promiseSampleTrue = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true)
+    }, 50)
+  })
+}
 
 User.attributeRules = function () {
   return {
@@ -30,11 +37,11 @@ User.expandables = function () {
 
 User.accessRules = function (user, model) {
   return {
-    VIEW: (user, model) => user.account_id === model.account_id,
+    VIEW: (user, model) => promiseSampleTrue(),
     UPDATE: (user, model) => true,
     DELETE: false,
     CREATE: true,
-    LIST: promiseSample
+    LIST: promiseSampleFalse
   }
 }
 

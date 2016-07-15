@@ -6,18 +6,25 @@ accessRules.checkAccess = (identity, model, action) => {
   try {
     operation = action.schema.accessRules(identity, model)[action.operation]
   } catch (e) {
-    throw new Error('Operation not defined at schema.accessRules')
+    action.context.fail('Operation not defined at schema.accessRules')
   }
   if (typeof operation === 'function') {
     operation = operation(identity, model)
   }
-  if (Promise.resolve(operation) === operation) {
+  if (typeof operation.then === 'function') {
     return operation
+      .then((res) => {
+        if (!res) {
+          action.context.fail(res)
+        }
+        return res
+      })
+      .catch((err) => action.context.fail(err))
   }
   if (!operation) {
-    throw new Error('Operation not allowed in this model')
+    action.context.fail('Operation not allowed in this model')
   }
-  return
+  return operation
 }
 
 module.exports = accessRules

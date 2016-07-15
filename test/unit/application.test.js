@@ -6,14 +6,8 @@ let UserSchema = require('../mocks/user.schema')
 
 describe('Application Class', () => {
   describe('.run', () => {
-    it('Should not work if the action has invalid attributes', (done) => {
-      Application.run(Action.create({context: {success: () => null}, schema: UserSchema, operation: Action.CREATE, body: () => null}))
-        .then(console.log)
-      // (Application.run(Action.create({context: {success: () => null, fail: (err) => { throw err }}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.be.eql(typeof Error)
-      return done()
-    })
     it('Should work when runing with a valid action', (done) => {
-      (() => Application.run(Action.create({event: {}, context: {success: () => null}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
+      (() => Application.run(Action.create({event: {}, context: {success: () => null, fail: (err) => { throw err }}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
       return done()
     })
   })

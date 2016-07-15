@@ -22,9 +22,21 @@ describe('Access-rules Class', () => {
       (() => AccessRules.checkAccess({}, {}, {schema: User, operation: 'SOMESORTOFOPERATION'})).should.throw(Error)
       return done()
     })
-    it('Should not work if the operation is a valid promise', (done) => {
-      console.log(AccessRules.checkAccess({}, {}, {schema: User, operation: Action.LIST}))
-      return done()
+    it('Should work if the operation is a valid promise', (done) => {
+      return AccessRules.checkAccess({}, {}, {context: {fail: (err) => err}, schema: User, operation: Action.VIEW})
+      .then((res) => {
+        res.should.be.eql(true)
+      })
+      .then(done)
+      .catch(done)
+    })
+    it('Should not work if the operation is a valid promise with false result', (done) => {
+      return AccessRules.checkAccess({}, {}, {context: {fail: (err) => err}, schema: User, operation: Action.LIST})
+      .then((res) => {
+        res.should.be.eql(false)
+      })
+      .then(done)
+      .catch(done)
     })
   })
 })

@@ -36,7 +36,9 @@ application.run = (action) => {
         .filterOutput()
         .send()
     })
-    .catch((err) => action.context.fail(err))
+    .catch((err) => {
+      action.context.fail(err)
+    })
 }
 
 module.exports = application
