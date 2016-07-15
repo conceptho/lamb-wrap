@@ -6,12 +6,8 @@ let UserSchema = require('../mocks/user.schema')
 
 describe('Application Class', () => {
   describe('.run', () => {
-    it('Should not work if the action has invalid attributes', (done) => {
-      (() => Application.run(Action.create({schema: 'User', operation: Action.DELETE, body: () => null}))).should.throw(Error)
-      return done()
-    })
     it('Should work when runing with a valid action', (done) => {
-      (() => Application.run(Action.create({event: {}, context: {success: () => null}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
+      (() => Application.run(Action.create({event: {}, context: {success: () => null, fail: (err) => err}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
       return done()
     })
   })
@@ -25,7 +21,7 @@ describe('Application Class', () => {
       return done()
     })
     it('Should be valid for a valid action', (done) => {
-      let handler = Application.handler(Action.create({schema: 'User', operation: Action.DELETE, body: () => null}))
+      let handler = Application.handler(Action.create({schema: UserSchema, operation: Action.DELETE, body: () => null}))
       ;(typeof handler).should.be.eql('function')
       return done()
     })
