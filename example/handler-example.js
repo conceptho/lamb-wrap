@@ -5,8 +5,7 @@ const Action = require('../index').Action
 
 
 var body = (action, identity, model) => {
-  model.save()
-  return model
+  return model.save()
 }
 
 module.exports = {

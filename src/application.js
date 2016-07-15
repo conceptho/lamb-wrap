@@ -31,9 +31,9 @@ application.run = (action) => {
       let identity = data[1]
       let model = data[2]
       return action
-        .filterInput()
+        .filterInput(identity)
         .execute(identity, model)
-        .filterOutput()
+        .filterOutput(identity)
         .send()
     })
     .catch((err) => {

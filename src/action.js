@@ -21,8 +21,8 @@ const Action = function (config) {
     this.response = new Response(this.body(this, identity, model), this)
     return this
   }
-  this.filterInput = () => ParamsFilter.filterInput(this)
-  this.filterOutput = () => ParamsFilter.filterOutput(this)
+  this.filterInput = (identity, model) => ParamsFilter.filterInput(identity, model, this)
+  this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)
 }
 
 module.exports = {
