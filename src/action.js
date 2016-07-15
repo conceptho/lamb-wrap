@@ -1,11 +1,11 @@
 'use strict'
 
-let ParamsFilter = require('./param-filter')
-let Response = require('./response')
-let operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
-let requiredAttributes = ['schema', 'operation', 'body']
+const ParamsFilter = require('./param-filter')
+const Response = require('./response')
+const operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
+const requiredAttributes = ['schema', 'operation', 'body']
 
-let Action = function (config) {
+const Action = function (config) {
   this.response = false
   for (var key in config) {
     this[key] = config[key]

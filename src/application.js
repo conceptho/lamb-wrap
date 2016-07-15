@@ -1,10 +1,10 @@
 'use strict'
 
-let Authenticator = require('./authenticator')
-let AccessRules = require('./access-rules')
-let ModelLoader = require('./model-loader')
+const Authenticator = require('./authenticator')
+const AccessRules = require('./access-rules')
+const ModelLoader = require('./model-loader')
 
-let application = {}
+const application = {}
 
 application.handler = (action) => {
   if (!action) {

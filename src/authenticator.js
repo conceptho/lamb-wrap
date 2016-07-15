@@ -1,6 +1,6 @@
 'use strict'
 
-let authenticator = {}
+const authenticator = {}
 
 authenticator.getIdentity = (action) => {
   // TODO: BASED ON AUTH SENT BY THE USER, ATHENTICATE AND RETRIEVE THE IDENTITY OF THE CURRENT USER

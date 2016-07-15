@@ -1,6 +1,6 @@
 'use strict'
 
-let Action = require('../../src/action')
+const Action = require('../../src/action')
 
 describe('Action Class', () => {
   describe('.create', () => {
@@ -21,7 +21,7 @@ describe('Action Class', () => {
       return done()
     })
     it('Action can have custom attributes', (done) => {
-      let actualAction = Action.create({schema: '', operation: Action.UPDATE, body: () => null, description: 'Desc goes here'})
+      const actualAction = Action.create({schema: '', operation: Action.UPDATE, body: () => null, description: 'Desc goes here'})
       actualAction.should.have.property('description', 'Desc goes here')
       return done()
     })
