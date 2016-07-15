@@ -6,7 +6,7 @@ accessRules.checkAccess = (identity, model, action) => {
   try {
     operation = action.schema.accessRules(identity, model)[action.operation]
   } catch (e) {
-    action.context.fail('Operation not defined at schema.accessRules')
+    action.context.fail('Operation' + action.operation + 'not defined at schema.accessRules')
   }
   if (typeof operation === 'function') {
     operation = operation(identity, model)
@@ -22,7 +22,7 @@ accessRules.checkAccess = (identity, model, action) => {
       .catch((err) => action.context.fail(err))
   }
   if (!operation) {
-    action.context.fail('Operation not allowed in this model')
+    action.context.fail('Operation ' + action.operation + ' not allowed in this model')
   }
   return operation
 }
