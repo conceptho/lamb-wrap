@@ -1,6 +1,6 @@
 'use strict'
 
-let paramsFilter = {}
+const paramsFilter = {}
 
 paramsFilter.filterInput = (action) => {
   // TODO: MUST FILTER THE INPUT ATTRIBUTES BASED ON SCHEMA.ATTRIBUTERULES

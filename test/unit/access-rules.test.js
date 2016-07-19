@@ -1,8 +1,8 @@
 'use strict'
 
-let AccessRules = require('../../src/access-rules')
-let Action = require('../../src/action')
-let User = require('../mocks/user.schema')
+const AccessRules = require('../../src/access-rules')
+const Action = require('../../src/action')
+const User = require('../mocks/user.schema')
 
 describe('Access-rules Class', () => {
   describe('.checkAccess', () => {

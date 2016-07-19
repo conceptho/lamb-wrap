@@ -1,6 +1,6 @@
 'use strict'
 
-let should = require('should')
+const should = require('should')
 
 before((done) => done())
 

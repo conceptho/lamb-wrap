@@ -1,8 +1,8 @@
 'use strict'
 
-let User = {}
+const User = {}
 
-let promiseSampleFalse = () => {
+const promiseSampleFalse = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(false)
@@ -10,7 +10,7 @@ let promiseSampleFalse = () => {
   })
 }
 
-let promiseSampleTrue = () => {
+const promiseSampleTrue = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(true)

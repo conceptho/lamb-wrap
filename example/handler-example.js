@@ -1,7 +1,7 @@
 'use strict'
 // Should use require('lamb-warp') instead
-let Application = require('../index').Application
-let Action = require('../index').Action
+const Application = require('../index').Application
+const Action = require('../index').Action
 
 
 var body = (action, identity, model) => {

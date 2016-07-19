@@ -1,5 +1,5 @@
 'use strict'
-let accessRules = {}
+const accessRules = {}
 
 accessRules.checkAccess = (identity, model, action) => {
   let operation = false

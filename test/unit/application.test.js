@@ -1,8 +1,8 @@
 'use strict'
 
-let Action = require('../../src/action')
-let Application = require('../../src/application')
-let UserSchema = require('../mocks/user.schema')
+const Action = require('../../src/action')
+const Application = require('../../src/application')
+const UserSchema = require('../mocks/user.schema')
 
 describe('Application Class', () => {
   describe('.run', () => {
@@ -21,7 +21,7 @@ describe('Application Class', () => {
       return done()
     })
     it('Should be valid for a valid action', (done) => {
-      let handler = Application.handler(Action.create({schema: UserSchema, operation: Action.DELETE, body: () => null}))
+      const handler = Application.handler(Action.create({schema: UserSchema, operation: Action.DELETE, body: () => null}))
       ;(typeof handler).should.be.eql('function')
       return done()
     })
