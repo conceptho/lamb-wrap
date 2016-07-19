@@ -5,10 +5,19 @@ const UserSchema = require('../mocks/user.schema')
 
 module.exports = Action.create({
   event: {
-    auth: {},
-    payload: {
+    body: {
       name: 'Luciano França'
-    }
+    },
+    headers: {
+      secretKey: 'aHashedSecretKey'
+    },
+    pathParams: {},
+    queryParams: {
+      id: 'aHashedAccountId'
+    },
+    method: 'PUT',
+    resourcePath: '/User',
+    source: 'aws.apiGateway'
   },
   context: {
     success: () => 'context.succeed called',
