@@ -13,7 +13,7 @@ module.exports = Action.create({
     },
     pathParams: {},
     queryParams: {
-      id: 'aHashedAccountId'
+      account_id: 'aHashedAccountId'
     },
     method: 'PUT',
     resourcePath: '/User',
