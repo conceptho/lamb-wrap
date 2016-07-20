@@ -44,10 +44,11 @@ paramsFilter.filterInput = (identity, action) => {
     })
     return result
   }, {})
-
   return Promise.props(possibleAttributes)
-    .then((data) => filterAction(action, data, eventKeys, ['public']))
-    .catch((err) => console.log(err))
+    .then((data) => {
+      return filterAction(action, data, eventKeys, ['public'])
+    })
+    .catch((err) => action.context.fail(err))
 }
 
 paramsFilter.filterOutput = (identity, model, action) => {

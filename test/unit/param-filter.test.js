@@ -9,7 +9,6 @@ describe('Param-filter Class', () => {
     it('Should work when runing with a valid action with a valid indentity', (done) => {
       return ParamFilter.filterInput(sampleIdentity, sampleAction)
         .then((data) => {
-          console.log(data)
           return done()
         })
     })
