@@ -35,17 +35,30 @@ application.run = (action) => {
     })
     .then((data) => {
       return Promise.props({
-        accessRules: AccessRules.checkAccess(data.identity, data.model, action),
+        accessRules: data.accessRules,
         identity: data.identity,
         model: data.model,
         action: action.filterInput(data.identity)
       })
     })
     .then((data) => {
-      return data.action
-        .execute(data.identity, data.model)
-        .filterOutput(data.identity)
-        .send()
+      return Promise.props({
+        accessRules: data.accessRules,
+        identity: data.identity,
+        model: data.model,
+        action: data.action.execute(data.identity, data.model)
+      })
+    })
+    .then((data) => {
+      return Promise.props({
+        accessRules: data.accessRules,
+        identity: data.identity,
+        model: data.model,
+        action: data.action.filterOutput(data.identity)
+      })
+    })
+    .then((data) => {
+      return data.action.send()
     })
     .catch((err) => {
       action.context.fail(err)
