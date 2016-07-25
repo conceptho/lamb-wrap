@@ -59,18 +59,11 @@ User.accessRules = function (user, model) {
 }
 
 
-User.getIdentityByJWTToken = function (jwtToken) {
-  return jwt.verifyAsync(jwtToken, 'secret')
-    .then((data) => {
-      console.log(data)
-      return data
-    })
-    .catch((err) => {
-      throw new Error(err)
-    })
+User.getIdentityByJwtToken = function (jwtToken) {
+  return Promise.all([])
 }
 
-User.getIdentityByAPIToken = function (apiToken) {
+User.getIdentityByApiToken = function (apiToken) {
   return Promise.all([])
 }
 
