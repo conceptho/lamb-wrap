@@ -6,9 +6,10 @@ const ModelLoader = require('./model-loader')
 const Promise = require('bluebird')
 
 const Application = function (config) {
-  this.identity = {
-    schema: config.identitySchema,
-    jwtSecret: config.jwtSecret
+  this.identity = {}
+  this.identity.schema = config.identitySchema
+  if (config.jwtSecret) {
+    this.identity.jwtSecret = config.jwtSecret
   }
   this.handler = (action) => {
     if (!action) {
