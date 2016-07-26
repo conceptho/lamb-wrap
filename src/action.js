@@ -20,7 +20,7 @@ const Action = function (config) {
   }
   this.execute = (identity, model) => {
     this.response = new Response(this.body(this, identity, model), this)
-    return Promise.all([]).then(() => this)
+    return Promise.resolve(this)
   }
   this.filterInput = (identity) => ParamsFilter.filterInput(identity, this)
   this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)

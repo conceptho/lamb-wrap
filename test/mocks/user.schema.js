@@ -60,11 +60,12 @@ User.accessRules = function (user, model) {
 
 
 User.getIdentityByJwtToken = function (jwtToken) {
-  return Promise.all([])
+  return Promise.resolve(Object.assign({}, require('./identity.sample'), jwtToken))
+    .catch((err) => new Error(err))
 }
 
 User.getIdentityByApiToken = function (apiToken) {
-  return Promise.all([])
+  return Promise.resolve(require('./identity.sample'))
 }
 
 module.exports = User

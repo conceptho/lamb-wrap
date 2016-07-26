@@ -12,13 +12,16 @@ authenticator.getIdentity = (action, identity) => {
         return identity.schema.getIdentityByJwtToken(payload)
       })
       .catch((err) => {
-        throw new Error(err)
+        throw action.context.fail(err)
       })
   }
   if (action.event.headers.apiKey) {
     return identity.schema.getIdentityByApiToken(action.event.headers.apiKey)
+      .catch((err) => {
+        throw action.context.fail(err)
+      })
   }
-  action.context.fail('No credentials found')
+  return Promise.reject(action.context.fail('No credentials found'))
 }
 
 module.exports = authenticator
