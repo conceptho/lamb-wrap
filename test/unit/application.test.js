@@ -19,7 +19,9 @@ describe('Application Class', () => {
             apiKey: 'aHashedApiKey'
           },
           pathParams: {},
-          queryParams: {}
+          queryParams: {
+            id: 'aHashedAccountId'
+          }
         },
         context: {
           success: () => null,

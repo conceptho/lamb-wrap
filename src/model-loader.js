@@ -1,10 +1,16 @@
 'use strict'
 
+const Promise = require('bluebird')
+const Action = require('./action')
+
 const modelLoader = {}
 
-modelLoader.load = (action) => {
-  // TODO: LOAD THE SPECIFIED MODEL IF ALLOWED(ACCESSRULES.CHECKACCESS) AND EXPAND BASED ON MODEL.EXPANDABLES CONFIGURATION
-  return Promise.all([])
+modelLoader.load = (action, identity) => {
+  let model = Promise.promisifyAll(action.model)
+  if (action.operation === Action.LIST) {
+    return model.findAllowed(identity)
+  }
+  return action.event.queryParams.id ? model.findByIdAsync(action.event.queryParams.id) : model.findByIdAsync(action.event.pathParams.id)
 }
 
 module.exports = modelLoader

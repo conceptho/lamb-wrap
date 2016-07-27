@@ -59,13 +59,23 @@ User.accessRules = function (user, model) {
 }
 
 
-User.getIdentityByJwtToken = function (jwtToken) {
+User.getIdentityByJwtToken = (jwtToken) => {
   return Promise.resolve(Object.assign({}, require('./identity.sample'), jwtToken))
     .catch((err) => new Error(err))
 }
 
-User.getIdentityByApiToken = function (apiToken) {
+User.getIdentityByApiToken = (apiToken) => {
   return Promise.resolve(require('./identity.sample'))
+}
+
+User.findAllowed = (identity) => {
+  return Promise.resolve(require('./identity.sample'))
+}
+
+User.findById = (id, cb) => {
+  let data = require('./identity.sample')
+  let err = null
+  cb(err, data)
 }
 
 module.exports = User

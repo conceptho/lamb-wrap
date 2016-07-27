@@ -25,7 +25,7 @@ const Application = function (config) {
     return Authenticator.getIdentity(action, this.identity)
       .then((identity) => {
         return Promise.props({
-          model: ModelLoader.load(action),
+          model: ModelLoader.load(action, identity),
           identity: identity
         })
       })
