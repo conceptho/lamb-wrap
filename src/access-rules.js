@@ -4,9 +4,9 @@ const accessRules = {}
 accessRules.checkAccess = (identity, model, action) => {
   let operation = false
   try {
-    operation = action.schema.accessRules(identity, model)[action.operation]
+    operation = action.model.accessRules(identity, model)[action.operation]
   } catch (e) {
-    action.context.fail('Operation' + action.operation + 'not defined at schema.accessRules')
+    action.context.fail('Operation' + action.operation + 'not defined at model.accessRules')
   }
   if (typeof operation === 'function') {
     operation = operation(identity, model)

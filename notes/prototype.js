@@ -1,4 +1,3 @@
-// assign a function to the "statics" object of our animalSchema
 userSchema.statics.attributeRules = function () {
   return {
     account_id: 'protected',
@@ -36,19 +35,6 @@ var User = mongoose.model('User', userSchema)
 User.findByName('fido', function (err, users) {
   console.log(users)
 })
-
-// GET /user/123?expand=account
-
-// *-> user authentication
-// *-> event validation
-// -> resource loader
-// -> user authorization
-// -> check resource access rule
-// -> body parameters filtering (for edition/listing)
-// -> method body (get user by id)
-// -> expand and serialize
-// -> parameters filtering for visualization
-// *-> return result
 
 var User = function () {
   return this

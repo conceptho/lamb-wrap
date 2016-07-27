@@ -36,7 +36,7 @@ const filterAction = (action, rules, eventKeys, options) => {
 }
 
 paramsFilter.filterInput = (identity, action) => {
-  const attributeRules = action.schema.attributeRules()
+  const attributeRules = action.model.attributeRules()
   const eventKeys = ['body', 'headers', 'pathParams', 'queryParams']
   let possibleAttributes = eventKeys.reduce((result, current) => {
     Object.keys(action.event[current]).forEach((subEventKey) => {
@@ -52,7 +52,7 @@ paramsFilter.filterInput = (identity, action) => {
 }
 
 paramsFilter.filterOutput = (identity, model, action) => {
-  // TODO: MUST FILTER THE OUTPUT ATTRIBUTES BASED ON SCHEMA.ATTRIBUTERULES
+  // TODO: MUST FILTER THE OUTPUT ATTRIBUTES BASED ON MODEL.ATTRIBUTERULES
   return action.response
 }
 

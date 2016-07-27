@@ -2,10 +2,10 @@
 
 const Authenticator = require('../../src/authenticator')
 const sampleAction = require('../mocks/action.sample')
-const sampleUserSchema = require('../mocks/user.schema')
+const UserModel = require('../mocks/user.model')
 
 const configIdentity = {
-  schema: sampleUserSchema,
+  model: UserModel,
   jwtSecret: 'aHashedSecret'
 }
 

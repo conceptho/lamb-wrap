@@ -1,7 +1,7 @@
 'use strict'
 
 const Action = require('../../src/action')
-const UserSchema = require('../mocks/user.schema')
+const UserModel = require('../mocks/user.model')
 
 module.exports = Action.create({
   event: {
@@ -23,7 +23,7 @@ module.exports = Action.create({
     success: () => 'context.succeed called',
     fail: (err) => err
   },
-  schema: UserSchema,
+  model: UserModel,
   operation: Action.UPDATE,
   body: () => null
 })

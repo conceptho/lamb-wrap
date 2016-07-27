@@ -7,7 +7,7 @@ const Promise = require('bluebird')
 
 const Application = function (config) {
   this.identity = {}
-  this.identity.schema = config.identitySchema
+  this.identity.model = config.identityModel
   if (config.jwtSecret) {
     this.identity.jwtSecret = config.jwtSecret
   }
