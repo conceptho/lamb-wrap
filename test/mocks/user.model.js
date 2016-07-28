@@ -69,13 +69,17 @@ User.getIdentityByApiToken = (apiToken) => {
 }
 
 User.findAllowed = (identity) => {
-  return Promise.resolve(require('./identity.sample'))
+  let sampleIdentity = Object.assign({}, require('./identity.sample'), {identityCode: 'listing'})
+  if (identity.id === sampleIdentity.id) {
+    return Promise.resolve(sampleIdentity)
+  }
+  return Promise.reject(new Error('No model allowed'))
 }
 
 User.findById = (id, cb) => {
-  let data = require('./identity.sample')
+  let sampleIdentity = Object.assign({}, require('./identity.sample'), {identityCode: 'normal'})
   let err = null
-  cb(err, data)
+  cb(err, sampleIdentity)
 }
 
 module.exports = User
