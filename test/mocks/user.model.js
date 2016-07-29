@@ -34,8 +34,8 @@ User.attributeRules = function () {
   return {
     account_id: 'protected',
     name: 'public', // qualquer um pode ver e editar
-    email: (identity) => 'public',
-    apiKey: (identity) => promiseSamplePublic(),
+    email: (identity, model) => 'public',
+    apiKey: (identity, model) => promiseSamplePublic(),
     created_at: 'protected', // só pode ver
     password: 'private', // não pode ver nem alterar
     logins: 'protected'
@@ -48,10 +48,10 @@ User.expandables = function () {
   }
 }
 
-User.accessRules = function (user, model) {
+User.accessRules = function (identity, model) {
   return {
-    VIEW: (user, model) => promiseSampleTrue(),
-    UPDATE: (user, model) => true,
+    VIEW: (identity, model) => promiseSampleTrue(),
+    UPDATE: (identity, model) => true,
     DELETE: false,
     CREATE: true,
     LIST: promiseSampleFalse

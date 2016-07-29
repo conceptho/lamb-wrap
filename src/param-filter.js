@@ -4,7 +4,7 @@ const Promise = require('bluebird')
 
 const paramsFilter = {}
 
-const resolveAttribute = (action, attribute, identity) => {
+const resolveAttribute = (action, attribute, identity, model) => {
   if (!attribute) {
     return 'private'
   }
@@ -19,7 +19,7 @@ const resolveAttribute = (action, attribute, identity) => {
       .catch((err) => action.context.fail(err))
   }
   if (typeof attribute === 'function') {
-    return resolveAttribute(action, attribute(identity), identity)
+    return resolveAttribute(action, attribute(identity, model), identity, model)
   }
   return attribute
 }
@@ -35,12 +35,12 @@ const filterAction = (action, rules, eventKeys, options) => {
   return action
 }
 
-paramsFilter.filterInput = (identity, action) => {
+paramsFilter.filterInput = (identity, model, action) => {
   const attributeRules = action.model.attributeRules()
   const eventKeys = ['body', 'headers', 'pathParams', 'queryParams']
   let possibleAttributes = eventKeys.reduce((result, current) => {
     Object.keys(action.event[current]).forEach((subEventKey) => {
-      result[subEventKey] = resolveAttribute(action, attributeRules[subEventKey], identity)
+      result[subEventKey] = resolveAttribute(action, attributeRules[subEventKey], identity, model)
     })
     return result
   }, {})

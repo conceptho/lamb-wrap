@@ -2,8 +2,8 @@ userSchema.statics.attributeRules = function () {
   return {
     account_id: 'protected',
     name: 'public', // qualquer um pode ver e editar
-    email: function (model, user) { return 'public' },
-    secretKey: function (model, user) { return 'protected' }
+    email: function (user, model) { return 'public' },
+    secretKey: function (user, model) { return 'protected' }
     created_at: 'protected', // só pode ver
     password: 'private' // não pode ver nem alterar
   }
