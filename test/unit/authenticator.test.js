@@ -1,7 +1,7 @@
 'use strict'
 
 const Authenticator = require('../../src/authenticator')
-const sampleAction = require('../mocks/action.sample')
+const sampleAction = require('../mocks/action.sample')()
 const UserModel = require('../mocks/user.model')
 
 const configIdentity = {

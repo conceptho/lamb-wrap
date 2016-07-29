@@ -1,7 +1,7 @@
 'use strict'
 
 const ModelLoader = require('../../src/model-loader')
-const sampleAction = require('../mocks/action.sample')
+const sampleAction = require('../mocks/action.sample')()
 const sampleIdentity = require('../mocks/identity.sample')
 const Action = require('../../src/action')
 
