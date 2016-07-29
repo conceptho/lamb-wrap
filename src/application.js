@@ -7,7 +7,7 @@ const Promise = require('bluebird')
 
 const Application = function (config) {
   this.identity = {}
-  this.identity.schema = config.identitySchema
+  this.identity.model = config.identityModel
   if (config.jwtSecret) {
     this.identity.jwtSecret = config.jwtSecret
   }
@@ -25,7 +25,7 @@ const Application = function (config) {
     return Authenticator.getIdentity(action, this.identity)
       .then((identity) => {
         return Promise.props({
-          model: ModelLoader.load(action),
+          model: ModelLoader.load(action, identity),
           identity: identity
         })
       })

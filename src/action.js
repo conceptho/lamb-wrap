@@ -4,7 +4,7 @@ const Promise = require('bluebird')
 const ParamsFilter = require('./param-filter')
 const Response = require('./response')
 const operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
-const requiredAttributes = ['schema', 'operation', 'body']
+const requiredAttributes = ['model', 'operation', 'body']
 
 const Action = function (config) {
   this.response = false

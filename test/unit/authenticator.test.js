@@ -2,10 +2,10 @@
 
 const Authenticator = require('../../src/authenticator')
 const sampleAction = require('../mocks/action.sample')
-const sampleUserSchema = require('../mocks/user.schema')
+const UserModel = require('../mocks/user.model')
 
 const configIdentity = {
-  schema: sampleUserSchema,
+  model: UserModel,
   jwtSecret: 'aHashedSecret'
 }
 
@@ -14,7 +14,7 @@ describe('Authenticator Class', () => {
     it('Should work when runing with a valid action using apiKey', (done) => {
       Authenticator.getIdentity(sampleAction, configIdentity)
         .then((identity) => {
-          identity.should.have.property('account_id')
+          identity.should.have.property('id')
           identity.should.have.property('name')
           identity.should.have.property('email')
           identity.should.have.property('getIdentityByJwtToken')
@@ -31,7 +31,7 @@ describe('Authenticator Class', () => {
           body: { name: 'Luciano Franças' },
           headers: { jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-OuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSPo' },
           pathParams: {},
-          queryParams: { account_id: 'aHashedAccountId' },
+          queryParams: { id: 'aHashedAccountId' },
           method: 'PUT',
           resourcePath: '/User',
           source: 'aws.apiGateway'
@@ -49,7 +49,7 @@ describe('Authenticator Class', () => {
           body: { name: 'Luciano Franças' },
           headers: { jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-JuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSPo' },
           pathParams: {},
-          queryParams: { account_id: 'aHashedAccountId' },
+          queryParams: { id: 'aHashedAccountId' },
           method: 'PUT',
           resourcePath: '/User',
           source: 'aws.apiGateway'
@@ -66,7 +66,7 @@ describe('Authenticator Class', () => {
           body: { name: 'Luciano França' },
           headers: {},
           pathParams: {},
-          queryParams: { account_id: 'aHashedAccountId' },
+          queryParams: { id: 'aHashedAccountId' },
           method: 'PUT',
           resourcePath: '/User',
           source: 'aws.apiGateway'

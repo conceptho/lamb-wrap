@@ -1,7 +1,7 @@
 'use strict'
 
-const idendity = Object.assign({}, require('./user.schema'), {
-  account_id: 'aHashedAccountId',
+const idendity = Object.assign({}, require('./user.model'), {
+  id: 'aHashedAccountId',
   name: 'Luciano Pellacani França',
   email: 'lucianopf@outlook.com',
   apiKey: 'aHashedSecretKey',

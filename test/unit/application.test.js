@@ -2,10 +2,10 @@
 
 const Action = require('../../src/action')
 const Application = require('../../src/application')
-const UserSchema = require('../mocks/user.schema')
+const UserModel = require('../mocks/user.model')
 
 let application = Application.create({
-  identitySchema: UserSchema,
+  identityModel: UserModel,
   jwtSecret: 'aHashedSecret'
 })
 
@@ -19,13 +19,15 @@ describe('Application Class', () => {
             apiKey: 'aHashedApiKey'
           },
           pathParams: {},
-          queryParams: {}
+          queryParams: {
+            id: 'aHashedAccountId'
+          }
         },
         context: {
           success: () => null,
           fail: (err) => console.log(err)
         },
-        schema: UserSchema,
+        model: UserModel,
         operation: Action.CREATE,
         body: () => null
       }))
@@ -44,7 +46,7 @@ describe('Application Class', () => {
       return done()
     })
     it('Should be valid for a valid action', (done) => {
-      const handler = application.handler(Action.create({schema: UserSchema, operation: Action.DELETE, body: () => null}))
+      const handler = application.handler(Action.create({model: UserModel, operation: Action.DELETE, body: () => null}))
       ;(typeof handler).should.be.eql('function')
       return done()
     })

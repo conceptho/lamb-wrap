@@ -9,14 +9,14 @@ authenticator.getIdentity = (action, identity) => {
   if (action.event.headers.jwtToken) {
     return jwt.verifyAsync(action.event.headers.jwtToken, identity.jwtSecret)
       .then((payload) => {
-        return identity.schema.getIdentityByJwtToken(payload)
+        return identity.model.getIdentityByJwtToken(payload)
       })
       .catch((err) => {
         throw action.context.fail(err)
       })
   }
   if (action.event.headers.apiKey) {
-    return identity.schema.getIdentityByApiToken(action.event.headers.apiKey)
+    return identity.model.getIdentityByApiToken(action.event.headers.apiKey)
       .catch((err) => {
         throw action.context.fail(err)
       })

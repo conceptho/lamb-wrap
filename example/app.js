@@ -1,9 +1,9 @@
 'use strict'
 const Application = require('../index').Application
-const userSchema = require('../models/user')
+const userModel = require('../models/user')
 
 let application = Application.create({
-  identitySchema: userSchema,
+  identityModel: userModel,
   jwtSecret: 'aHashedSecret'
 })
 

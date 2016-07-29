@@ -11,7 +11,7 @@ describe('Param-filter Class', () => {
         .then((data) => {
           data.event.body.should.have.property('name')
           data.event.headers.should.have.property('apiKey')
-          data.event.queryParams.should.not.have.property('account_id')
+          data.event.queryParams.should.not.have.property('id')
           return done()
         })
     })
