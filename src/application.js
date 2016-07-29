@@ -41,7 +41,7 @@ const Application = function (config) {
           accessRules: data.accessRules,
           identity: data.identity,
           model: data.model,
-          action: action.filterInput(data.identity)
+          action: action.filterInput(data.identity, data.model)
         })
       })
       .then((data) => {

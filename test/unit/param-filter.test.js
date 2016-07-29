@@ -7,7 +7,7 @@ describe('Param-filter Class', () => {
   describe('.filterInput', () => {
     it('Should work when runing with a valid action with a valid indentity', (done) => {
       let sampleAction = require('../mocks/action.sample')
-      return ParamFilter.filterInput(sampleIdentity, sampleAction)
+      return ParamFilter.filterInput(sampleIdentity, sampleIdentity, sampleAction)
         .then((data) => {
           data.event.body.should.have.property('name')
           data.event.headers.should.have.property('apiKey')
@@ -20,7 +20,7 @@ describe('Param-filter Class', () => {
       delete sampleAction.event.body.name
       delete sampleAction.event.headers.secretKey
       delete sampleAction.event.queryParams.account_id
-      return ParamFilter.filterInput(sampleIdentity, sampleAction)
+      return ParamFilter.filterInput(sampleIdentity, sampleIdentity, sampleAction)
         .then((data) => {
           return done()
         })
