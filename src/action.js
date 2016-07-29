@@ -1,5 +1,6 @@
 'use strict'
 
+const Promise = require('bluebird')
 const ParamsFilter = require('./param-filter')
 const Response = require('./response')
 const operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
@@ -19,10 +20,10 @@ const Action = function (config) {
   }
   this.execute = (identity, model) => {
     this.response = new Response(this.body(this, identity, model), this)
-    return this
+    return Promise.all([]).then(() => this)
   }
-  this.filterInput = () => ParamsFilter.filterInput(this)
-  this.filterOutput = () => ParamsFilter.filterOutput(this)
+  this.filterInput = (identity) => ParamsFilter.filterInput(identity, this)
+  this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)
 }
 
 module.exports = {

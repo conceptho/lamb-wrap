@@ -18,11 +18,20 @@ const promiseSampleTrue = () => {
   })
 }
 
+let promiseSamplePublic = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('public')
+    }, 50)
+  })
+}
+
 User.attributeRules = function () {
   return {
     account_id: 'protected',
     name: 'public', // qualquer um pode ver e editar
-    email: function (model, user) { return 'public' },
+    email: (identity) => 'public',
+    secretKey: (identity) => promiseSamplePublic(),
     created_at: 'protected', // só pode ver
     password: 'private', // não pode ver nem alterar
     logins: 'protected'

@@ -6,9 +6,32 @@ const UserSchema = require('../mocks/user.schema')
 
 describe('Application Class', () => {
   describe('.run', () => {
+    it('Should not work if the action has invalid attributes', (done) => {
+      return Application.run(Action.create({schema: 'User', operation: Action.DELETE, body: () => null}))
+        .then()
+        .catch((err) => {
+          return done()
+        })
+    })
     it('Should work when runing with a valid action', (done) => {
-      (() => Application.run(Action.create({event: {}, context: {success: () => null, fail: (err) => err}, schema: UserSchema, operation: Action.CREATE, body: () => null}))).should.not.throw(Error)
-      return done()
+      return Application.run(Action.create({
+        event: {
+          body: {},
+          headers: {},
+          pathParams: {},
+          queryParams: {}
+        },
+        context: {
+          success: () => null,
+          fail: (err) => console.log(err)
+        },
+        schema: UserSchema,
+        operation: Action.CREATE,
+        body: () => null
+      }))
+        .then((data) => {
+          return done()
+        })
     })
   })
   describe('.handler', () => {
