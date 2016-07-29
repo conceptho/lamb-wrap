@@ -16,14 +16,29 @@ describe('Param-filter Class', () => {
         })
     })
     it('Should work when runing without params', (done) => {
-      let sampleAction = require('../mocks/action.sample')
-      delete sampleAction.event.body.name
-      delete sampleAction.event.headers.secretKey
-      delete sampleAction.event.queryParams.account_id
-      return ParamFilter.filterInput(sampleIdentity, sampleIdentity, sampleAction)
+      let sampleAction = Object.assign({}, require('../mocks/action.sample'),
+        {
+          event: {
+            body: {},
+            headers: { apiKey: 'aHashedSecretKey' },
+            pathParams: {},
+            queryParams: {},
+            method: 'PUT',
+            resourcePath: '/User',
+            source: 'aws.apiGateway'
+          }
+        })
+      return ParamFilter.filterInput(sampleIdentity, sampleAction)
         .then((data) => {
           return done()
         })
+    })
+  })
+  describe('.filterOutput', () => {
+    it('Should work when runing with valid identity, model and action', (done) => {
+      let sampleAction = require('../mocks/action.sample')
+      console.log(require('../mocks/action.sample'))
+      return done()
     })
   })
 })
