@@ -52,8 +52,21 @@ paramsFilter.filterInput = (identity, model, action) => {
 }
 
 paramsFilter.filterOutput = (identity, model, action) => {
-  // TODO: MUST FILTER THE OUTPUT ATTRIBUTES BASED ON MODEL.ATTRIBUTERULES
-  return action.response
+  const attributeRules = action.model.attributeRules()
+  let possibleAttributes = Object.keys(action.response.data).reduce((final, current) => {
+    final[current] = resolveAttribute(action, attributeRules[current], identity)
+    return final
+  }, {})
+  return Promise.props(possibleAttributes)
+    .then((data) => {
+      Object.keys(action.response.data).forEach((key) => {
+        if (!data[key] || ['public', 'protected'].indexOf(data[key]) === -1) {
+          delete action.response.data[key]
+        }
+      })
+      return action
+    })
+    .catch((err) => action.context.fail(err))
 }
 
 module.exports = paramsFilter

@@ -25,5 +25,5 @@ module.exports = Action.create({
   },
   model: UserModel,
   operation: Action.UPDATE,
-  body: () => null
+  body: (action, identity, model) => model
 })
