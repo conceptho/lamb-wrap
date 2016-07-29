@@ -1,5 +1,9 @@
 'use strict'
 
+const Promise = require('bluebird')
+const jwt = Promise.promisifyAll(require('jsonwebtoken'))
+
+
 const User = {}
 
 const promiseSampleFalse = () => {
@@ -31,7 +35,7 @@ User.attributeRules = function () {
     account_id: 'protected',
     name: 'public', // qualquer um pode ver e editar
     email: (identity) => 'public',
-    secretKey: (identity) => promiseSamplePublic(),
+    apiKey: (identity) => promiseSamplePublic(),
     created_at: 'protected', // só pode ver
     password: 'private', // não pode ver nem alterar
     logins: 'protected'
@@ -52,6 +56,16 @@ User.accessRules = function (user, model) {
     CREATE: true,
     LIST: promiseSampleFalse
   }
+}
+
+
+User.getIdentityByJwtToken = function (jwtToken) {
+  return Promise.resolve(Object.assign({}, require('./identity.sample'), jwtToken))
+    .catch((err) => new Error(err))
+}
+
+User.getIdentityByApiToken = function (apiToken) {
+  return Promise.resolve(require('./identity.sample'))
 }
 
 module.exports = User

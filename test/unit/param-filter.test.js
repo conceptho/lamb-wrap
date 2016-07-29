@@ -10,7 +10,7 @@ describe('Param-filter Class', () => {
       return ParamFilter.filterInput(sampleIdentity, sampleAction)
         .then((data) => {
           data.event.body.should.have.property('name')
-          data.event.headers.should.have.property('secretKey')
+          data.event.headers.should.have.property('apiKey')
           data.event.queryParams.should.not.have.property('account_id')
           return done()
         })

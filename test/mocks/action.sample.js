@@ -9,7 +9,7 @@ module.exports = Action.create({
       name: 'Luciano França'
     },
     headers: {
-      secretKey: 'aHashedSecretKey'
+      apiKey: 'aHashedSecretKey'
     },
     pathParams: {},
     queryParams: {

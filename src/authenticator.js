@@ -1,10 +1,27 @@
 'use strict'
 
+const Promise = require('bluebird')
+const jwt = Promise.promisifyAll(require('jsonwebtoken'))
+
 const authenticator = {}
 
-authenticator.getIdentity = (action) => {
-  // TODO: BASED ON AUTH SENT BY THE USER, ATHENTICATE AND RETRIEVE THE IDENTITY OF THE CURRENT USER
-  return Promise.all([])
+authenticator.getIdentity = (action, identity) => {
+  if (action.event.headers.jwtToken) {
+    return jwt.verifyAsync(action.event.headers.jwtToken, identity.jwtSecret)
+      .then((payload) => {
+        return identity.schema.getIdentityByJwtToken(payload)
+      })
+      .catch((err) => {
+        throw action.context.fail(err)
+      })
+  }
+  if (action.event.headers.apiKey) {
+    return identity.schema.getIdentityByApiToken(action.event.headers.apiKey)
+      .catch((err) => {
+        throw action.context.fail(err)
+      })
+  }
+  return Promise.reject(action.context.fail('No credentials found'))
 }
 
 module.exports = authenticator
