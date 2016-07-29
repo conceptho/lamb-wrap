@@ -57,11 +57,11 @@ const Application = function (config) {
           accessRules: data.accessRules,
           identity: data.identity,
           model: data.model,
-          action: data.action.filterOutput(data.identity)
+          action: data.action.filterOutput(data.identity, data.model)
         })
       })
       .then((data) => {
-        return data.action.send()
+        return data.action.response.send()
       })
       .catch((err) => {
         action.context.fail(err)
