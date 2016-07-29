@@ -29,7 +29,7 @@ describe('Application Class', () => {
         },
         model: UserModel,
         operation: Action.CREATE,
-        body: () => null
+        body: (action, identity, model) => model
       }))
         .then((data) => {
           return done()
