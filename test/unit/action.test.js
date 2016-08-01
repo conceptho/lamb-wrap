@@ -1,6 +1,9 @@
 'use strict'
 
 const Action = require('../../src/action')
+const SampleAction = require('../mocks/action.sample')
+const sampleIdentity = require('../mocks/identity.sample')
+const sampleModel = require('../mocks/user.model')
 
 describe('Action Class', () => {
   describe('.create', () => {
@@ -24,6 +27,39 @@ describe('Action Class', () => {
       const actualAction = Action.create({model: '', operation: Action.UPDATE, body: () => null, description: 'Desc goes here'})
       actualAction.should.have.property('description', 'Desc goes here')
       return done()
+    })
+  })
+  describe('.execute', () => {
+    it('Should work for a simple body function', (done) => {
+      let sampleAction = SampleAction()
+      return sampleAction.execute(sampleIdentity, sampleModel)
+        .then((data) => {
+          data.response.should.not.be.eql(false)
+          return done()
+        })
+    })
+    it('Should work for a body promise', (done) => {
+      let sampleAction = SampleAction()
+      sampleAction.body = (action, identity, model) => {
+        return Promise.all([])
+          .then(() => {
+            return model
+          })
+      }
+      return sampleAction.execute(sampleIdentity, sampleModel)
+        .then((data) => {
+          data.response.should.not.be.eql(false)
+          return done()
+        })
+    })
+    it('Should not work when body is provided as an simple attribute', (done) => {
+      let sampleAction = SampleAction()
+      sampleAction.body = 'invalidBody'
+      return sampleAction.execute(sampleIdentity, sampleModel)
+        .catch((err) => {
+          err.should.not.be.eql(null)
+          return done()
+        })
     })
   })
 })

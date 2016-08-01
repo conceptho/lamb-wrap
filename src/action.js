@@ -19,8 +19,18 @@ const Action = function (config) {
     throw new Error('Invalid arguments')
   }
   this.execute = (identity, model) => {
-    this.response = new Response(this.body(this, identity, model), this)
-    return Promise.resolve(this)
+    if (typeof this.body.then === 'function') {
+      return this.body(this, identity, model)
+        .then((data) => {
+          this.response = new Response(data, this)
+          return this
+        })
+    }
+    return Promise.all([])
+      .then(() => {
+        this.response = new Response(this.body(this, identity, model), this)
+        return this
+      })
   }
   this.filterInput = (identity, model) => ParamsFilter.filterInput(identity, model, this)
   this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)
