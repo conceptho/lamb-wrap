@@ -2,6 +2,7 @@
   "name": "lamb-wrap",
   "version": "0.1.0",
   "description": "Lambda entrypoint wrapper",
+  "author": "Conceptho",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test MOCHA_FILE=$CIRCLE_TEST_REPORTS/output.xml mocha --recursive --reporter $MOCHA_REPORTER"
