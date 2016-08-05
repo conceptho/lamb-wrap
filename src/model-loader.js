@@ -10,6 +10,9 @@ modelLoader.load = (action, identity) => {
   if (action.operation === Action.LIST) {
     return model.findAllowed(identity)
   }
+  if (action.operation === Action.CREATE) {
+    return Promise.resolve(new model())
+  }
   return action.event.queryParams.id ? model.findByIdAsync(action.event.queryParams.id) : model.findByIdAsync(action.event.pathParams.id)
 }
 

@@ -17,8 +17,6 @@ describe('Authenticator Class', () => {
           identity.should.have.property('id')
           identity.should.have.property('name')
           identity.should.have.property('email')
-          identity.should.have.property('getIdentityByJwtToken')
-          identity.should.have.property('getIdentityByApiToken')
           return done()
         })
         .catch((err) => {

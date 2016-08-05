@@ -1,10 +1,6 @@
 'use strict'
 
 const Promise = require('bluebird')
-const jwt = Promise.promisifyAll(require('jsonwebtoken'))
-
-
-const User = {}
 
 const promiseSampleFalse = () => {
   return new Promise((resolve, reject) => {
@@ -30,6 +26,9 @@ let promiseSamplePublic = () => {
   })
 }
 
+function User () {
+}
+
 User.attributeRules = function () {
   return {
     account_id: 'protected',
@@ -41,13 +40,11 @@ User.attributeRules = function () {
     logins: 'protected'
   }
 }
-
 User.expandables = function () {
   return {
     logins: true
   }
 }
-
 User.accessRules = function (identity, model) {
   return {
     VIEW: (identity, model) => promiseSampleTrue(),
@@ -57,17 +54,13 @@ User.accessRules = function (identity, model) {
     LIST: promiseSampleFalse
   }
 }
-
-
 User.getIdentityByJwtToken = (jwtToken) => {
   return Promise.resolve(Object.assign({}, require('./identity.sample'), jwtToken))
     .catch((err) => new Error(err))
 }
-
 User.getIdentityByApiToken = (apiToken) => {
   return Promise.resolve(require('./identity.sample'))
 }
-
 User.findAllowed = (identity) => {
   let sampleIdentity = Object.assign({}, require('./identity.sample'), {identityCode: 'listing'})
   if (identity.id === sampleIdentity.id) {
@@ -75,7 +68,6 @@ User.findAllowed = (identity) => {
   }
   return Promise.reject(new Error('No model allowed'))
 }
-
 User.findById = (id, cb) => {
   let sampleIdentity = Object.assign({}, require('./identity.sample'), {identityCode: 'normal'})
   let err = null

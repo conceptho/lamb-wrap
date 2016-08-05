@@ -1,6 +1,7 @@
 'use strict'
 
-const idendity = Object.assign({}, require('./user.model'), {
+let UserModel = require('./user.model')
+const idendity = Object.assign({}, new UserModel(), {
   id: 'aHashedAccountId',
   name: 'Luciano Pellacani França',
   email: 'lucianopf@outlook.com',
