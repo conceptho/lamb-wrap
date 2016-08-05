@@ -21,7 +21,7 @@ const mock = () => {
       source: 'aws.apiGateway'
     },
     context: {
-      success: () => 'context.succeed called',
+      succeed: () => 'context.succeed called',
       fail: (err) => err
     },
     model: UserModel,

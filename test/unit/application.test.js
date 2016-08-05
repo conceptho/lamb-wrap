@@ -12,7 +12,7 @@ let application = Application.create({
 describe('Application Class', () => {
   describe('.run', () => {
     it('Should work when runing with a valid action', (done) => {
-      return application.run(Action.create({
+      application.run(Action.create({
         event: {
           body: {},
           headers: {
@@ -24,7 +24,7 @@ describe('Application Class', () => {
           }
         },
         context: {
-          success: () => null,
+          succeed: () => null,
           fail: (err) => console.log(err)
         },
         model: UserModel,
