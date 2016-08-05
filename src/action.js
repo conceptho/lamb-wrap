@@ -26,11 +26,8 @@ const Action = function (config) {
           return this
         })
     }
-    return Promise.all([])
-      .then(() => {
-        this.response = new Response(this.body(this, identity, model), this)
-        return this
-      })
+    this.response = new Response(this.body(this, identity, model), this)
+    return Promise.resolve(this)
   }
   this.filterInput = (identity, model) => ParamsFilter.filterInput(identity, model, this)
   this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)
