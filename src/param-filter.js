@@ -53,6 +53,7 @@ paramsFilter.filterInput = (identity, model, action) => {
 
 paramsFilter.filterOutput = (identity, model, action) => {
   const attributeRules = action.model.attributeRules()
+  action.response.data = action.response.data.toJSON()
   let possibleAttributes = Object.keys(action.response.data).reduce((final, current) => {
     final[current] = resolveAttribute(action, attributeRules[current], identity)
     return final
