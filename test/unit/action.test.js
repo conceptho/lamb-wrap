@@ -40,7 +40,7 @@ describe('Action Class', () => {
     })
     it('Should work for a body promise', (done) => {
       let sampleAction = SampleAction()
-      sampleAction.body = (action, identity, model) => {
+      sampleAction.body = function (action, identity, model) {
         return Promise.all([])
           .then(() => {
             return model
@@ -57,6 +57,7 @@ describe('Action Class', () => {
       sampleAction.body = 'invalidBody'
       return sampleAction.execute(sampleIdentity, sampleModel)
         .catch((err) => {
+          console.log(err)
           err.should.not.be.eql(null)
           return done()
         })
