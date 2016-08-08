@@ -14,7 +14,9 @@ describe('Application Class', () => {
     it('Should work when runing with a valid action', (done) => {
       application.run(Action.create({
         event: {
-          body: {},
+          body: {
+            name: 'Luciano Franca'
+          },
           headers: {
             apiKey: 'aHashedApiKey'
           },
@@ -28,7 +30,7 @@ describe('Application Class', () => {
           fail: (err) => console.log(err)
         },
         model: UserModel,
-        operation: Action.CREATE,
+        operation: Action.VIEW,
         body: (action, identity, model) => model
       }))
         .then((data) => {

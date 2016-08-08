@@ -57,7 +57,6 @@ describe('Action Class', () => {
       sampleAction.body = 'invalidBody'
       return sampleAction.execute(sampleIdentity, sampleModel)
         .catch((err) => {
-          console.log(err)
           err.should.not.be.eql(null)
           return done()
         })
