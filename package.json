@@ -1,6 +1,6 @@
 {
   "name": "lamb-wrap",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Lambda entrypoint wrapper",
   "author": "Conceptho",
   "main": "index.js",
