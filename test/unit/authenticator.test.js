@@ -58,7 +58,7 @@ describe('Authenticator Class', () => {
           return done()
         })
     })
-    it('Should call context.fail when there\'s no auth method in event', (done) => {
+    it('Should return null when there\'s no auth method in event', (done) => {
       let customEvent = {
         event: {
           body: { name: 'Luciano França' },
@@ -71,8 +71,8 @@ describe('Authenticator Class', () => {
         }
       }
       Authenticator.getIdentity(Object.assign({}, sampleAction, customEvent), configIdentity)
-        .catch((err) => {
-          err.should.be.eql('No credentials found')
+        .then((res) => {
+          (!!res).should.not.be.ok()
           return done()
         })
     })

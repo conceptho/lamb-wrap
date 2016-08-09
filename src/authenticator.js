@@ -21,7 +21,7 @@ authenticator.getIdentity = (action, identity) => {
         throw action.context.fail(err)
       })
   }
-  return Promise.reject(action.context.fail('No credentials found'))
+  return Promise.resolve(null)
 }
 
 module.exports = authenticator
