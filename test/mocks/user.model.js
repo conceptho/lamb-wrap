@@ -18,14 +18,6 @@ const promiseSampleTrue = () => {
   })
 }
 
-let promiseSamplePublic = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('public')
-    }, 50)
-  })
-}
-
 function User () {
 }
 
