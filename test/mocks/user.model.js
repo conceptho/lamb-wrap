@@ -34,7 +34,6 @@ User.attributeRules = function () {
     account_id: 'protected',
     name: 'public', // qualquer um pode ver e editar
     email: (identity, model) => 'public',
-    apiKey: (identity, model) => promiseSamplePublic(),
     created_at: 'protected', // só pode ver
     password: 'private', // não pode ver nem alterar
     logins: 'protected'
@@ -54,13 +53,11 @@ User.accessRules = function (identity, model) {
     LIST: promiseSampleFalse
   }
 }
-User.getIdentityByJwtToken = (jwtToken) => {
-  return Promise.resolve(Object.assign({}, require('./identity.sample'), jwtToken))
+User.getIdentity = (payload) => {
+  return Promise.resolve(Object.assign({}, require('./identity.sample'), payload))
     .catch((err) => new Error(err))
 }
-User.getIdentityByApiToken = (apiToken) => {
-  return Promise.resolve(require('./identity.sample'))
-}
+
 User.findAllowed = (identity) => {
   let sampleIdentity = Object.assign({}, require('./identity.sample'), {identityCode: 'listing'})
   if (identity.id === sampleIdentity.id) {

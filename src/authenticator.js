@@ -6,17 +6,11 @@ const jwt = Promise.promisifyAll(require('jsonwebtoken'))
 const authenticator = {}
 
 authenticator.getIdentity = (action, identity) => {
-  if (action.event.headers.jwtToken) {
-    return jwt.verifyAsync(action.event.headers.jwtToken, identity.jwtSecret)
+  if (action.event.headers.Authorization) {
+    return jwt.verifyAsync(action.event.headers.Authorization.replace('Bearer ', ''), identity.jwtSecret)
       .then((payload) => {
-        return identity.model.getIdentityByJwtToken(payload)
+        return identity.model.getIdentity(payload)
       })
-      .catch((err) => {
-        throw action.context.fail(err)
-      })
-  }
-  if (action.event.headers.apiKey) {
-    return identity.model.getIdentityByApiToken(action.event.headers.apiKey)
       .catch((err) => {
         throw action.context.fail(err)
       })

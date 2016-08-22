@@ -10,7 +10,6 @@ describe('Param-filter Class', () => {
       ParamFilter.filterInput(sampleIdentity, sampleIdentity, sampleAction)
         .then((data) => {
           data.event.body.should.have.property('name')
-          data.event.headers.should.have.property('apiKey')
           data.event.queryParams.should.not.have.property('id')
           return done()
         })
@@ -20,7 +19,7 @@ describe('Param-filter Class', () => {
         {
           event: {
             body: {},
-            headers: { apiKey: 'aHashedSecretKey' },
+            headers: {},
             pathParams: {},
             queryParams: {},
             method: 'PUT',
@@ -44,7 +43,6 @@ describe('Param-filter Class', () => {
         .then((data) => {
           data.response.data.should.have.property('name')
           data.response.data.should.have.property('email')
-          data.response.data.should.have.property('apiKey')
           data.response.data.should.have.property('created_at')
           data.response.data.should.have.property('logins')
           data.response.data.should.not.have.property('password')

@@ -11,23 +11,11 @@ const configIdentity = {
 
 describe('Authenticator Class', () => {
   describe('.getIdentity', () => {
-    it('Should work when runing with a valid action using apiKey', (done) => {
-      Authenticator.getIdentity(sampleAction, configIdentity)
-        .then((identity) => {
-          identity.should.have.property('id')
-          identity.should.have.property('name')
-          identity.should.have.property('email')
-          return done()
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    })
     it('Should work when runing with a valid JwtToken', (done) => {
       let customEvent = {
         event: {
           body: { name: 'Luciano Franças' },
-          headers: { jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-OuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSPo' },
+          headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-OuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSPo' },
           pathParams: {},
           queryParams: { id: 'aHashedAccountId' },
           method: 'PUT',
@@ -45,7 +33,7 @@ describe('Authenticator Class', () => {
       let customEvent = {
         event: {
           body: { name: 'Luciano Franças' },
-          headers: { jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-JuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSPo' },
+          headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RUb2tlbiI6InNvbWVIYXNoZWRUb2tlbiJ9.2Ui-OuRnnLCS585qUW7zKgRD1CzfK8ZCq5R3uf6iSP0' },
           pathParams: {},
           queryParams: { id: 'aHashedAccountId' },
           method: 'PUT',
