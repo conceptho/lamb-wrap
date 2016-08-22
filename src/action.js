@@ -1,5 +1,9 @@
 'use strict'
 
+/*
+  This module is responsible of creating a new action to be used at application.
+*/
+
 const Promise = require('bluebird')
 const ParamsFilter = require('./param-filter')
 const Response = require('./response')
@@ -7,7 +11,9 @@ const operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
 const requiredAttributes = ['model', 'operation', 'body']
 
 const Action = function (config) {
+  // Default response is false
   this.response = false
+  // Setup config variables
   for (var key in config) {
     this[key] = config[key]
     let required = requiredAttributes.indexOf(key)
