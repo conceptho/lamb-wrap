@@ -1,4 +1,4 @@
-# Lamb-Wrap <sub>λ</sub><sup>🌯</sup>
+# Lamb-Wrap λ🌯
 
 ## Description
 Lamb-wrap is a node module designed for AWS Lambda that wraps the complexity over authentication, permission and model loading and returns a ready to use lambda handler to
