@@ -5,6 +5,7 @@ Lamb-wrap is a node module designed for AWS Lambda that wraps the complexity of 
 be used both at plain [AWS Lambda](https://aws.amazon.com/lambda/details/) or with the [Serverless Framework](http://serverless.com/).
 
 The way lamb-wrap works with the following cycle:
+
 1. Authenticate.
 2. Load the requested model.
 3. Check permission for the requested operation.
