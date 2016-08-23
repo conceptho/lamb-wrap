@@ -11,9 +11,9 @@ const operationConstants = ['CREATE', 'UPDATE', 'DELETE', 'VIEW', 'LIST']
 const requiredAttributes = ['model', 'operation', 'body']
 
 const Action = function (config) {
-  // Default response is false
+  // Default response is false.
   this.response = false
-  // Setup config variables
+  // Check required attributes.
   for (var key in config) {
     this[key] = config[key]
     let required = requiredAttributes.indexOf(key)
@@ -24,8 +24,10 @@ const Action = function (config) {
   if (requiredAttributes.length > 0 || operationConstants.indexOf(this.operation) === -1) {
     throw new Error('Invalid arguments')
   }
+  // Function responsible for executing the provided body function.
   this.execute = (identity, model) => {
     try {
+      // Check if it's a promise.
       if (typeof this.body(this, identity, model).then === 'function') {
         return this.body(this, identity, model)
           .then((data) => {
@@ -43,6 +45,7 @@ const Action = function (config) {
   this.filterOutput = (identity, model) => ParamsFilter.filterOutput(identity, model, this)
 }
 
+// Return a constructor for Action and a few operations constants
 module.exports = {
   create: (config) => new Action(config),
   CREATE: 'CREATE',

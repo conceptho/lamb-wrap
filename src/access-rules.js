@@ -1,15 +1,21 @@
 'use strict'
+
+/*
+  Module responsible for resolving the availability of the requested operation.
+*/
 const Promise = require('bluebird')
 const accessRules = {}
 
 
 accessRules.checkAccess = (identity, model, action) => {
   let operation = false
+  // Check if there's a valid operation.
   try {
     operation = action.model.accessRules(identity, model)[action.operation]
   } catch (e) {
     action.context.fail('Operation ' + action.operation + ' not defined at model.accessRules')
   }
+  // Resolve operations permission.
   if (typeof operation === 'function') {
     operation = operation(identity, model)
   }
